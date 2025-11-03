@@ -2,6 +2,10 @@
 
 Discover component hierarchy trees in React (.jsx) projects
 
+<p align="center">
+  <img src="https://i.imgur.com/dWk6w4P.png" alt="Components Hierarchy" width="384" height="256"/>
+</p>
+
 ## 📋 Description
 
 This tool helps you visualize React component dependencies by analyzing your codebase and showing:
