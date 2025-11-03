@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/dWk6w4P.png" alt="Components Hierarchy" width="384" height="256"/>
+  <img src="https://i.imgur.com/4V221bH.png" alt="Components Hierarchy" width="384" height="256"/>
 </p>
 
 ## 📋 Description
