@@ -3,13 +3,40 @@
 const { execSync } = require('child_process');
 const path = require('path');
 
-const targetFile = process.argv[2] || 'app/javascript/packs/ui/domain/progresses/progress_form.jsx';
+const targetFile = process.argv[2];
 const targetComponent = process.argv[3]; // Optional: target component to find paths to
 
-// Run madge with filters
+if (!targetFile) {
+  console.error('Usage: node show-component-tree.js <path/to/component.jsx> [path/to/target-component.jsx]');
+  process.exit(1);
+}
+
+// Get the directory where this script is located
+const scriptDir = __dirname;
+const webpackConfigPath = path.join(scriptDir, 'webpack.config.js');
+
+// Convert target file to absolute path
+const absoluteTargetFile = path.resolve(targetFile);
+
+// Find project root from the target file (look for package.json)
+function findProjectRoot(startPath) {
+  const fs = require('fs');
+  let currentDir = path.dirname(startPath);
+  while (currentDir !== path.parse(currentDir).root) {
+    if (fs.existsSync(path.join(currentDir, 'package.json'))) {
+      return currentDir;
+    }
+    currentDir = path.dirname(currentDir);
+  }
+  return path.dirname(startPath); // Fallback to file directory
+}
+
+const projectRoot = findProjectRoot(absoluteTargetFile);
+
+// Run madge with the webpack config from script directory and project root as env var
 const output = execSync(
-  `madge --webpack-config webpack.config.js --json --exclude '^(.*/(utils|models|hooks|static|css)/|.*\\.(css|json))' ${targetFile}`,
-  { encoding: 'utf-8' }
+  `madge --webpack-config "${webpackConfigPath}" --json --exclude '^(.*/(utils|models|hooks|static|css)/|.*\\.(css|json))' "${absoluteTargetFile}"`,
+  { encoding: 'utf-8', env: { ...process.env, PROJECT_ROOT: projectRoot } }
 );
 
 const graph = JSON.parse(output);
