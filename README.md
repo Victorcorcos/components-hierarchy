@@ -42,20 +42,18 @@ Webpack configuration used by madge to resolve path aliases. Pre-configured for 
 
 ## 🫳 Usage
 
-**No setup required!** Simply run the script from this repository pointing to your project files.
+**No setup required!** You just need to be **inside the repository you want to see the components dependencies** and run the script from this repository pointing to your project files.
 
 ### Mode 1: Show Full Component Hierarchy
 
 Display all component dependencies for a given file:
 
 ```bash
-node /path/to/components-hierarchy/show-component-tree.js path/to/component.jsx
+node /path/to/components-hierarchy/show-component-tree.js PATH/TO/component.jsx
 ```
 
 **Example:**
 ```bash
-# From your project directory
-cd /home/user/my-react-project
 node /path/to/components-hierarchy/show-component-tree.js app/javascript/packs/ui/domain/library.jsx
 ```
 
@@ -85,13 +83,11 @@ Library
 Show all paths from a source component to a target component:
 
 ```bash
-node /path/to/components-hierarchy/show-component-tree.js path/to/source.jsx path/to/target.jsx
+node /path/to/components-hierarchy/show-component-tree.js PATH/TO/source.jsx PATH/TO/target.jsx
 ```
 
 **Example:**
 ```bash
-# From your project directory
-cd /home/user/my-react-project
 node /path/to/components-hierarchy/show-component-tree.js app/javascript/packs/ui/domain/library.jsx app/javascript/packs/ui/domain/seller.jsx
 ```
 
@@ -106,7 +102,6 @@ Library
 
 **Example with multiple paths:**
 ```bash
-# From your project directory
 node /path/to/components-hierarchy/show-component-tree.js app/javascript/packs/ui/domain/progresses/progress_form.jsx app/javascript/packs/ui/core/buttons/action_button.jsx
 ```
 
